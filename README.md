@@ -1,5 +1,7 @@
 API for my clicker game.
 
-Handles basic backend functionality to handle game logic.
+Express app for little overhead and easy customization. A pretty straightforward API with only a couple end points for handling user login, updating user progress and game logic.
 
-mongodb to handle users, track their progress along with achievements
+crypto-js and jsonwebtoken for encryption of user password, handling auth, and maintaining user login.
+
+mongodb and mongoose to store user data, track progress
