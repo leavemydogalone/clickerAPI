@@ -26,4 +26,29 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Get all users
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const users = await User.find();
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get top 10 user clicks
+router.get("/clicks", verifyToken, async (req, res) => {
+  const query = req.query.top;
+  try {
+    const users = query
+      ? await User.find().sort({ clicks: -1 }).limit(10)
+      : await User.find();
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
