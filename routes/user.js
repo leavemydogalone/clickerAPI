@@ -40,13 +40,11 @@ router.get("/", verifyToken, async (req, res) => {
 
 // get top 10 user clicks
 router.get("/clicks", verifyToken, async (req, res) => {
-  const query = req.query.top;
   try {
-    const users = query
-      ? await User.find().sort({ clicks: -1 }).limit(10)
-      : await User.find();
+    const users = await User.find().sort({ clicks: -1 }).limit(10);
+    const clickArray = users.map((thing) => thing.clicks);
 
-    res.status(200).json(users);
+    res.status(200).json(clickArray);
   } catch (err) {
     res.status(500).json(err);
   }
